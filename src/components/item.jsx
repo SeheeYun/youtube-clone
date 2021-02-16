@@ -1,15 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Item = ({ id, thumb, localized }) => {
+const Item = ({ id, thumb, snippet, viewCount }) => {
+  const [view, setView] = useState(viewCount);
+  const [diff, setDiff] = useState();
+
+  useEffect(() => {
+    if (view >= 10000) {
+      setView(view => {
+        return parseInt(view / 10000) + '만';
+      });
+    }
+
+    setDiff(() => {
+      const curDate = new Date().getTime();
+      const itemDate = new Date(snippet.publishedAt).getTime();
+      let diff = curDate - itemDate;
+      diff = parseInt((diff / (1000 * 60 * 60)) % 24);
+      if (diff >= 24) {
+        return '1일';
+      }
+      return diff + '시간';
+    });
+  }, []);
+
   return (
-    <>
-      <div className="thumb">
-        <a href="#">
-          <img src={thumb.url} alt="no" />
-        </a>
+    <li className="item">
+      <div className="content">
+        <div className="thumb">
+          <a href="#">
+            <img src={thumb.url} alt="no" />
+          </a>
+        </div>
+        <div className="details">
+          <a className={'title'} href="#">
+            {snippet.title}
+          </a>
+          <div>{snippet.channelTitle}</div>
+          <div>
+            <span>조회수 {view}회</span>
+            <span>{diff} 전</span>
+          </div>
+        </div>
       </div>
-      <div className="details">{localized.title}</div>
-    </>
+    </li>
   );
 };
 

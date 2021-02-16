@@ -2,18 +2,18 @@ import React from 'react';
 import Item from './item';
 
 const ItemList = ({ items }) => {
-  console.log(items);
   return (
-    <div>
+    <ul className="item-list">
       {items.map(item => (
         <Item
           key={item['id']}
           id={item['id']}
           thumb={item['snippet']['thumbnails']['medium']}
-          localized={item['snippet']['localized']}
+          snippet={item['snippet']}
+          viewCount={item['statistics']['viewCount']}
         />
       ))}
-    </div>
+    </ul>
   );
 };
 
