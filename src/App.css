@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
 :root {
-  --item-per-row: 5;
+  --item-per-row: 3;
   --item-margin: 16px;
-  --gray-color: #3f3f3f;
+  --gray-color: #333333;
+  --search-form-border-color: #d3d3d3;
+  --search-btn-color: #999999;
 }
 
 * {
@@ -20,10 +24,78 @@ img {
 ul {
   list-style: none;
 }
+button {
+  outline: none;
+  border: none;
+}
 
-ul.item-list {
-  display: flex;
+/* header */
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
   width: 100%;
+  height: 56px;
+  background-color: #ffffff;
+  padding: 0 calc(var(--item-margin) * 2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo > img {
+  width: 30px;
+  margin-right: 2px;
+}
+.logo > span {
+  font-size: 20px;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: -0.8px;
+}
+.search_form {
+  height: 30px;
+  display: flex;
+}
+.search_form > input {
+  padding-left: 8px;
+  outline: none;
+  width: 360px;
+  height: 100%;
+  border: 1px solid var(--search-form-border-color);
+  border-radius: 2px 0 0 2px;
+  font-size: 16px;
+}
+.search_form > button {
+  width: 60px;
+  height: 100%;
+  border: 1px solid var(--search-form-border-color);
+  border-left: none;
+  border-radius: 0 2px 2px 0;
+  background-color: #ffffff;
+  color: var(--search-btn-color);
+}
+.avatar_btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding-top: 6px;
+  font-size: 24px;
+  color: #ffffff;
+  overflow: hidden;
+  background-color: royalblue;
+}
+
+/* content */
+ul.item-list {
+  position: relative;
+  top: 56px;
+  width: 100%;
+  margin-top: 24px;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }

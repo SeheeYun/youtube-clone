@@ -1,6 +1,7 @@
 import './app.css';
 import React, { useEffect, useState } from 'react';
 import ItemList from './components/itemList';
+import Header from './components/header';
 
 const App = () => {
   const [items, setItems] = useState([]);
@@ -21,7 +22,12 @@ const App = () => {
       .catch(error => console.log('error', error));
   }, []);
 
-  return <ItemList items={items} />;
+  return (
+    <>
+      <Header />
+      <ItemList items={items} />
+    </>
+  );
 };
 
 export default App;
