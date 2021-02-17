@@ -22,9 +22,31 @@ const App = () => {
       .catch(error => console.log('error', error));
   }, []);
 
+  const searchItems = keyword => {
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+    };
+
+    fetch(
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${keyword}&type=video&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4`,
+      requestOptions
+    )
+      .then(response => response.json())
+      .then(json => json.items)
+      .then(items =>
+        setItems(
+          items.map(item => {
+            return { ...item, id: item.id['videoId'] };
+          })
+        )
+      )
+      .catch(error => console.log('error', error));
+  };
+
   return (
     <>
-      <Header />
+      <Header searchItems={searchItems} />
       <ItemList items={items} />
     </>
   );

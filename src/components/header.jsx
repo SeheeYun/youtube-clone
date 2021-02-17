@@ -1,14 +1,24 @@
-import React from 'react';
+import { React, useRef } from 'react';
 
-const Header = props => {
+const Header = ({ searchItems }) => {
+  const formRef = useRef();
+  const inputRef = useRef();
+
+  const onSubmit = e => {
+    e.preventDefault();
+    const value = inputRef.current.value;
+    value && searchItems(value);
+    formRef.current.reset();
+  };
+
   return (
     <header className="header">
       <a href="#" className="logo">
         <img src="/images/logo.png" alt="logo" />
-        <span>YounTube</span>
+        <span>YunTube</span>
       </a>
-      <form className="search_form">
-        <input type="text" type="text" placeholder="검색" />
+      <form ref={formRef} className="search_form" onSubmit={onSubmit}>
+        <input ref={inputRef} stype="text" placeholder="검색" />
         <button type="submit">
           <i className="fas fa-search"></i>
         </button>

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
 :root {
-  --item-per-row: 3;
+  --item-per-row: 5;
   --item-margin: 16px;
   --gray-color: #333333;
   --search-form-border-color: #d3d3d3;
@@ -48,7 +48,7 @@ button {
   align-items: center;
 }
 .logo > img {
-  width: 30px;
+  width: 28px;
   margin-right: 2px;
 }
 .logo > span {
@@ -107,18 +107,21 @@ li.item {
   margin-right: calc(var(--item-margin) / 2);
   margin-bottom: 40px;
 }
-.details {
+.meta {
   display: flex;
   flex-direction: column;
   padding-right: 30px;
 }
-.details > div {
+.meta > div {
   font-size: 14px;
   color: var(--gray-color);
   line-height: 1.4;
 }
-.details span:last-child::before {
+.meta span:last-child::before {
   content: ' • ';
+}
+.none {
+  display: none;
 }
 .title {
   display: -webkit-box;

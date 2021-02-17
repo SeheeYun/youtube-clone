@@ -10,7 +10,7 @@ const ItemList = ({ items }) => {
           id={item['id']}
           thumb={item['snippet']['thumbnails']['medium']}
           snippet={item['snippet']}
-          viewCount={item['statistics']['viewCount']}
+          viewCount={item['statistics'] && item['statistics']['viewCount']}
         />
       ))}
     </ul>
