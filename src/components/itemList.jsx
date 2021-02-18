@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Item from './item';
 
-const ItemList = ({ items }) => {
+const ItemList = memo(({ items, getVideo }) => {
+  console.log(items);
   return (
     <ul className="item_list">
       {items.map(item => (
@@ -11,10 +12,11 @@ const ItemList = ({ items }) => {
           thumb={item['snippet']['thumbnails']['medium']}
           snippet={item['snippet']}
           viewCount={item['statistics'] && item['statistics']['viewCount']}
+          getVideo={getVideo}
         />
       ))}
     </ul>
   );
-};
+});
 
 export default ItemList;

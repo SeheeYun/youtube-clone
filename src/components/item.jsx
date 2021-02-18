@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Item = ({ id, thumb, snippet, viewCount }) => {
+const Item = ({ id, thumb, snippet, viewCount, getVideo }) => {
   const [view, setView] = useState(viewCount);
   const [diff, setDiff] = useState();
 
@@ -28,9 +28,13 @@ const Item = ({ id, thumb, snippet, viewCount }) => {
     }
   }, []);
 
+  const itemClick = () => {
+    getVideo(id);
+  };
+
   return (
     <li className="item">
-      <div className="item_box">
+      <div className="item_box" onClick={itemClick}>
         <div className="thumb">
           <a href="#">
             <img src={thumb.url} alt="thumb" />
