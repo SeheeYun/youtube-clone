@@ -1,32 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-const Item = ({ id, thumb, snippet, viewCount, getVideo }) => {
-  const [view, setView] = useState(viewCount);
-  const [diff, setDiff] = useState();
-
+const Item = ({ id, thumb, snippet, diff, view, getVideo }) => {
   useEffect(() => {
-    if (!viewCount) {
+    if (!view) {
       const metaData = document.querySelector('.meta_data');
       metaData.setAttribute('class', 'none_meta_data');
-    } else {
-      if (view >= 10000) {
-        setView(view => {
-          return parseInt(view / 10000) + '만';
-        });
-      }
-
-      setDiff(() => {
-        const curDate = new Date().getTime();
-        const itemDate = new Date(snippet.publishedAt).getTime();
-        let diff = curDate - itemDate;
-        diff = parseInt((diff / (1000 * 60 * 60)) % 24);
-        if (diff >= 24) {
-          return '1일';
-        }
-        return diff + '시간';
-      });
     }
-  }, []);
+  }, [view]);
 
   const itemClick = () => {
     getVideo(id);

@@ -7,10 +7,8 @@ import Player from './components/player';
 const App = () => {
   const [items, setItems] = useState([]);
   const [item, setItem] = useState();
-  console.log(item);
 
   const fetchData = useCallback(value => {
-    console.log('fatchData');
     const requestOptions = {
       method: 'GET',
       redirect: 'follow',
@@ -23,7 +21,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log('useEffect');
     fetchData(
       'videos?part=snippet,statistics&chart=mostPopular&maxResults=25&regionCode=KR&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4'
     )
@@ -53,7 +50,6 @@ const App = () => {
 
   const getVideo = useCallback(
     id => {
-      console.log('getvideo');
       fetchData(
         `videos?part=snippet,statistics&id=${id}&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4`
       )
@@ -78,7 +74,7 @@ const App = () => {
     <>
       <Header searchItems={searchItems} />
       <div className="content on_player">
-        <Player />
+        <Player item={item} />
         <ItemList items={items} getVideo={getVideo} />
       </div>
     </>

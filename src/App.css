@@ -185,3 +185,7 @@ li.item {
   position: absolute;
   background-color: #d1d1d1;
 }
+.video_info > div {
+  display: flex;
+  justify-content: space-between;
+}
