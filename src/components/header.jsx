@@ -1,14 +1,12 @@
 import { React, useRef } from 'react';
 
 const Header = ({ searchItems }) => {
-  const formRef = useRef();
   const inputRef = useRef();
 
   const onSubmit = e => {
     e.preventDefault();
     const value = inputRef.current.value;
     value && searchItems(value);
-    formRef.current.reset();
   };
 
   return (
@@ -17,7 +15,7 @@ const Header = ({ searchItems }) => {
         <img src="/images/logo.png" alt="logo" />
         <span>YunTube</span>
       </a>
-      <form ref={formRef} className="search_form" onSubmit={onSubmit}>
+      <form className="search_form" onSubmit={onSubmit}>
         <input ref={inputRef} stype="text" placeholder="검색" />
         <button type="submit">
           <i className="fas fa-search"></i>

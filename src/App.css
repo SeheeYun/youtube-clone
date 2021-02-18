@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
 :root {
-  --item-per-row: 5;
+  --item-per-row: 1;
   --item-margin: 16px;
   --gray-color: #333333;
   --search-form-border-color: #d3d3d3;
   --search-btn-color: #999999;
+  --on-player-item-list-width: 402px;
 }
 
 * {
@@ -90,11 +91,22 @@ button {
 }
 
 /* content */
-ul.item-list {
-  position: relative;
-  top: 56px;
+.content {
   width: 100%;
   margin-top: 24px;
+  position: relative;
+  top: 56px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* content-item-list */
+ul.item_list {
+  width: 100%;
+  padding-left: var(--item-margin);
+  padding-right: var(--item-margin);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -102,7 +114,7 @@ ul.item-list {
 li.item {
   width: calc(100% / var(--item-per-row));
 }
-.content {
+.item_box {
   margin-left: calc(var(--item-margin) / 2);
   margin-right: calc(var(--item-margin) / 2);
   margin-bottom: 40px;
@@ -112,15 +124,16 @@ li.item {
   flex-direction: column;
   padding-right: 30px;
 }
-.meta > div {
+.channel_title,
+.meta_data {
   font-size: 14px;
   color: var(--gray-color);
   line-height: 1.4;
 }
-.meta span:last-child::before {
+.meta_data > span:last-child::before {
   content: ' • ';
 }
-.none {
+.none_meta_data {
   display: none;
 }
 .title {
@@ -132,4 +145,43 @@ li.item {
   line-height: 1.4;
   margin-top: calc(var(--item-margin) / 3);
   margin-bottom: calc(var(--item-margin) / 4);
+}
+
+/* content-player-box */
+.content.on_player > .player_box {
+}
+.content.on_player > .item_list {
+  width: var(--on-player-item-list-width);
+  padding: 0;
+}
+.content.on_player .item_box {
+  margin: 0;
+}
+.player_box {
+  width: calc(100vw - var(--on-player-item-list-width));
+  padding: 0 calc(var(--item-margin) + (var(--item-margin) / 2));
+}
+.player_video {
+  position: relative;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+.player_video > iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.video_info,
+.video_meta {
+  position: relative;
+}
+.video_info::after,
+.video_meta::after {
+  content: '';
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  background-color: #d1d1d1;
 }

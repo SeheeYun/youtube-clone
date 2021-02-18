@@ -7,7 +7,7 @@ const Item = ({ id, thumb, snippet, viewCount }) => {
   useEffect(() => {
     if (!viewCount) {
       const metaData = document.querySelector('.meta_data');
-      metaData.setAttribute('class', 'none');
+      metaData.setAttribute('class', 'none_meta_data');
     } else {
       if (view >= 10000) {
         setView(view => {
@@ -30,17 +30,17 @@ const Item = ({ id, thumb, snippet, viewCount }) => {
 
   return (
     <li className="item">
-      <div className="content">
+      <div className="item_box">
         <div className="thumb">
           <a href="#">
             <img src={thumb.url} alt="thumb" />
           </a>
         </div>
         <div className="meta">
-          <a className={'title'} href="#">
+          <a className="title" href="#">
             {snippet.title}
           </a>
-          <div>{snippet.channelTitle}</div>
+          <div className="channel_title">{snippet.channelTitle}</div>
           <div className="meta_data">
             <span>조회수 {view}회</span>
             <span>{diff} 전</span>

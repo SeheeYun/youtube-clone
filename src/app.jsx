@@ -2,6 +2,7 @@ import './app.css';
 import React, { useEffect, useState } from 'react';
 import ItemList from './components/itemList';
 import Header from './components/header';
+import Player from './components/player';
 
 const App = () => {
   const [items, setItems] = useState([]);
@@ -47,7 +48,10 @@ const App = () => {
   return (
     <>
       <Header searchItems={searchItems} />
-      <ItemList items={items} />
+      <div className="content on_player">
+        <Player />
+        <ItemList items={items} />
+      </div>
     </>
   );
 };
