@@ -2,7 +2,6 @@ import React, { memo, useCallback } from 'react';
 import Item from './item';
 
 const ItemList = memo(({ items, getVideo }) => {
-  console.log(items);
   const parseIntView = useCallback(item => {
     const view = item.statistics.viewCount;
     if (view >= 10000) {

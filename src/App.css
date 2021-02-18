@@ -1,18 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto&display=swap');
 
 :root {
   --item-per-row: 1;
   --item-margin: 16px;
-  --gray-color: #333333;
+  --gray-color: #606060;
   --search-form-border-color: #d3d3d3;
   --search-btn-color: #999999;
   --on-player-item-list-width: 402px;
+  --meta-thumb-width: 48px;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body,
+html {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
 }
 a {
   color: inherit;
@@ -28,6 +35,7 @@ ul {
 button {
   outline: none;
   border: none;
+  background-color: #fff;
 }
 
 /* header */
@@ -83,6 +91,7 @@ button {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  margin-top: 6px;
   padding-top: 6px;
   font-size: 24px;
   color: #ffffff;
@@ -142,7 +151,7 @@ li.item {
   -webkit-line-clamp: 2;
   overflow: hidden;
   font-weight: bold;
-  line-height: 1.4;
+  line-height: 1.2;
   margin-top: calc(var(--item-margin) / 3);
   margin-bottom: calc(var(--item-margin) / 4);
 }
@@ -172,13 +181,13 @@ li.item {
   top: 0;
   width: 100%;
   height: 100%;
+  border: none;
 }
-.video_info,
-.video_meta {
+.video_info {
   position: relative;
+  padding-right: 30px;
 }
-.video_info::after,
-.video_meta::after {
+.video_info::after {
   content: '';
   height: 1px;
   width: 100%;
@@ -188,4 +197,50 @@ li.item {
 .video_info > div {
   display: flex;
   justify-content: space-between;
+  margin: var(--item-margin) 0;
+}
+.video_info .meta_data {
+  font-size: 15px;
+}
+h1.title {
+  font-size: 20px;
+  font-weight: 600;
+  padding-top: 20px;
+}
+.like_disLike > button {
+  font-size: 15px;
+  color: var(--gray-color);
+  font-weight: 600;
+  margin-left: 26px;
+}
+.video_meta {
+  padding-top: var(--item-margin);
+  display: flex;
+  justify-content: flex-start;
+}
+.video_meta span:last-child {
+  margin-bottom: var(--item-margin);
+}
+.meta_thumb {
+  padding-top: 4px;
+  margin-right: 16px;
+  text-align: center;
+  font-size: 34px;
+  color: #fff;
+  width: var(--meta-thumb-width);
+  height: var(--meta-thumb-width);
+  border-radius: 50%;
+  background-color: royalblue;
+}
+.video_meta > .meta {
+  width: calc(100% - var(--meta-thumb-width));
+  line-height: 1.6;
+  margin-top: 12px;
+}
+.video_meta > .meta > span:first-child {
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.video_meta > .meta > span:last-child {
+  max-width: 600px;
 }
