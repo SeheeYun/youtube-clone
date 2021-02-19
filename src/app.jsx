@@ -31,7 +31,6 @@ const App = () => {
 
   const searchItems = useCallback(
     keyword => {
-      console.log('search');
       fetchData(
         `search?part=snippet&maxResults=25&q=${keyword}&type=video&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4`
       )
