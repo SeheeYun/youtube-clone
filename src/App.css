@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto&display=swap');
 
 :root {
-  --item-per-row: 1;
+  --item-per-row: 4;
+  --on-player-item-per-row: 1;
   --item-margin: 16px;
   --gray-color: #606060;
   --search-form-border-color: #d3d3d3;
@@ -112,7 +113,7 @@ button {
 }
 
 /* content-item-list */
-ul.item_list {
+.item_list {
   width: 100%;
   padding-left: var(--item-margin);
   padding-right: var(--item-margin);
@@ -120,7 +121,7 @@ ul.item_list {
   flex-wrap: wrap;
   justify-content: center;
 }
-li.item {
+.item {
   width: calc(100% / var(--item-per-row));
 }
 .item_box {
@@ -142,7 +143,7 @@ li.item {
 .meta_data > span:last-child::before {
   content: ' • ';
 }
-.none_meta_data {
+.invisible_meta {
   display: none;
 }
 .title {
@@ -157,6 +158,9 @@ li.item {
 }
 
 /* content-on-player */
+.content.on_player .item {
+  width: calc(100% / var(--on-player-item-per-row));
+}
 .content.on_player > .player_box {
   display: block;
 }
@@ -180,6 +184,7 @@ li.item {
 
 /* content-player-box */
 .player_box {
+  display: none;
   width: calc(100vw - var(--on-player-item-list-width));
   padding: 0 calc(var(--item-margin) + (var(--item-margin) / 2));
 }

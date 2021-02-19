@@ -29,23 +29,27 @@ const App = () => {
       .catch(error => console.log('error', error));
   }, [fetchData]);
 
-  const searchItems = useCallback(
-    keyword => {
-      fetchData(
-        `search?part=snippet&maxResults=25&q=${keyword}&type=video&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4`
-      )
-        .then(json => json.items)
-        .then(items =>
-          setItems(
-            items.map(item => {
-              return { ...item, id: item.id['videoId'] };
-            })
-          )
+  const getItemsId = useCallback(keyword => {
+    return fetchData(
+      `search?part=snippet&maxResults=25&q=${keyword}&type=video&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4`
+    )
+      .then(json => json.items.map(item => item.id.videoId))
+      .then(id => id.join());
+  }, []);
+
+  const searchItems = useCallback(keyword => {
+    getItemsId(keyword)
+      .then(id =>
+        fetchData(
+          `videos?part=snippet,statistics&id=${id}&maxResults=25&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4`
         )
-        .catch(error => console.log('error', error));
-    },
-    [fetchData]
-  );
+      )
+      .then(json => json.items)
+      .then(items => setItems([...items]))
+      .catch(error => console.log('error', error));
+
+    offPlayer();
+  }, []);
 
   const getVideo = useCallback(
     id => {
@@ -65,14 +69,27 @@ const App = () => {
           })
         )
         .catch(error => console.log('error', error));
+
+      onPlayer();
     },
     [fetchData]
   );
 
+  const onPlayer = () => {
+    const content = document.querySelector('.content');
+    content.classList.add('on_player');
+  };
+
+  const offPlayer = () => {
+    const content = document.querySelector('.content');
+    content.classList.contains('on_player') &&
+      content.classList.remove('on_player');
+  };
+
   return (
     <>
       <Header searchItems={searchItems} />
-      <div className="content on_player">
+      <div className="content">
         <Player item={item} />
         <ItemList items={items} getVideo={getVideo} />
       </div>
