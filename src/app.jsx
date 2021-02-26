@@ -22,7 +22,7 @@ const App = () => {
 
   useEffect(() => {
     fetchData(
-      'videos?pageToken=CBkQAA&part=snippet,statistics&chart=mostPopular&maxResults=25&regionCode=KR&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4'
+      'videos?part=snippet,statistics&chart=mostPopular&maxResults=25&regionCode=KR&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4'
     )
       .then(json => json.items)
       .then(items => setItems([...items]))
@@ -71,6 +71,18 @@ const App = () => {
     content.classList.contains('on_player') &&
       content.classList.remove('on_player');
   };
+
+  const onScroll = useCallback(() => {
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    if (scrollTop + clientHeight === scrollHeight) {
+      console.log('asd');
+    }
+  }, []);
+  useEffect(() => {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () =>
+      window.removeEventListener('scroll', onScroll, { passive: true });
+  }, []);
 
   return (
     <>
