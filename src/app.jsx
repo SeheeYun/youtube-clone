@@ -22,58 +22,44 @@ const App = () => {
 
   useEffect(() => {
     fetchData(
-      'videos?part=snippet,statistics&chart=mostPopular&maxResults=25&regionCode=KR&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4'
+      'videos?pageToken=CBkQAA&part=snippet,statistics&chart=mostPopular&maxResults=25&regionCode=KR&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4'
     )
       .then(json => json.items)
       .then(items => setItems([...items]))
       .catch(error => console.log('error', error));
   }, [fetchData]);
 
-  const getItemsId = useCallback(keyword => {
-    return fetchData(
-      `search?part=snippet&maxResults=25&q=${keyword}&type=video&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4`
-    )
-      .then(json => json.items.map(item => item.id.videoId))
-      .then(id => id.join());
-  }, []);
-
-  const searchItems = useCallback(keyword => {
-    getItemsId(keyword)
-      .then(id =>
-        fetchData(
-          `videos?part=snippet,statistics&id=${id}&maxResults=25&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4`
-        )
+  const getItemsId = useCallback(
+    keyword => {
+      return fetchData(
+        `search?part=snippet&maxResults=25&q=${keyword}&type=video&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4`
       )
-      .then(json => json.items)
-      .then(items => setItems([...items]))
-      .catch(error => console.log('error', error));
-
-    offPlayer();
-  }, []);
-
-  const getVideo = useCallback(
-    id => {
-      fetchData(
-        `videos?part=snippet,statistics&id=${id}&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4`
-      )
-        .then(json => json.items[0])
-        .then(item =>
-          setItem({
-            ...item,
-            snippet: {
-              channelTitle: item.snippet.channelTitle,
-              description: item.snippet.description,
-              publishedAt: item.snippet.publishedAt,
-              title: item.snippet.title,
-            },
-          })
-        )
-        .catch(error => console.log('error', error));
-
-      onPlayer();
+        .then(json => json.items.map(item => item.id.videoId))
+        .then(id => id.join());
     },
     [fetchData]
   );
+
+  const searchItems = useCallback(
+    keyword => {
+      getItemsId(keyword)
+        .then(id =>
+          fetchData(
+            `videos?part=snippet,statistics&id=${id}&maxResults=25&key=AIzaSyAi9SltLLmkqtHmP_KFFSONcQ2wYTFw_V4`
+          )
+        )
+        .then(json => json.items)
+        .then(items => setItems([...items]))
+        .then(offPlayer)
+        .catch(error => console.log('error', error));
+    },
+    [getItemsId, fetchData]
+  );
+
+  const getVideo = useCallback(item => {
+    setItem({ ...item });
+    onPlayer();
+  }, []);
 
   const onPlayer = () => {
     const content = document.querySelector('.content');

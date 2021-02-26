@@ -25,9 +25,7 @@ const ItemList = memo(({ items, getVideo }) => {
       {items.map(item => (
         <Item
           key={item['id']}
-          id={item['id']}
-          thumb={item['snippet']['thumbnails']['medium']}
-          snippet={item['snippet']}
+          item={item}
           diff={diff(item)}
           view={item.statistics && parseIntView(item)}
           getVideo={getVideo}

@@ -185,7 +185,7 @@ button {
 /* content-player-box */
 .player_box {
   display: none;
-  width: calc(100vw - var(--on-player-item-list-width));
+  width: calc(100% - var(--on-player-item-list-width));
   padding: 0 calc(var(--item-margin) + (var(--item-margin) / 2));
 }
 .player_video {
@@ -252,9 +252,10 @@ h1.title {
   background-color: royalblue;
 }
 .video_meta > .meta {
-  width: calc(100% - var(--meta-thumb-width));
+  width: calc(100% - var(--meta-thumb-width) - 16px);
   line-height: 1.6;
   margin-top: 12px;
+  text-overflow: ellipsis;
 }
 .video_meta > .meta > span:first-child {
   font-weight: 600;
@@ -262,4 +263,5 @@ h1.title {
 }
 .video_meta > .meta > span:last-child {
   max-width: 600px;
+  width: 100%;
 }

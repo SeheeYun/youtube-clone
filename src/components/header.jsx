@@ -1,6 +1,6 @@
-import { React, useRef } from 'react';
+import { memo, React, useRef } from 'react';
 
-const Header = ({ searchItems }) => {
+const Header = memo(({ searchItems }) => {
   const inputRef = useRef();
 
   const onSubmit = e => {
@@ -28,6 +28,6 @@ const Header = ({ searchItems }) => {
       </div>
     </header>
   );
-};
+});
 
 export default Header;

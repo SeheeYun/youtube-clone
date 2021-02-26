@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-const Item = ({ id, thumb, snippet, diff, view, getVideo }) => {
+const Item = ({ item, diff, view, getVideo }) => {
   const itemClick = () => {
-    getVideo(id);
+    getVideo(item);
   };
 
   return (
@@ -10,14 +10,14 @@ const Item = ({ id, thumb, snippet, diff, view, getVideo }) => {
       <div className="item_box" onClick={itemClick}>
         <div className="thumb">
           <a href="#">
-            <img src={thumb.url} alt="thumb" />
+            <img src={item.snippet.thumbnails.medium.url} alt="thumb" />
           </a>
         </div>
         <div className="meta">
           <a className="title" href="#">
-            {snippet.title}
+            {item.snippet.title}
           </a>
-          <div className="channel_title">{snippet.channelTitle}</div>
+          <div className="channel_title">{item.snippet.channelTitle}</div>
           <div className="meta_data item_meta_data">
             <span>조회수 {view}회</span>
             <span>{diff} 전</span>
