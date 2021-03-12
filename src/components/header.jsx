@@ -1,12 +1,12 @@
 import { memo, React, useRef } from 'react';
 
-const Header = memo(({ searchItems }) => {
+const Header = memo(({ getSearchItems }) => {
   const inputRef = useRef();
 
   const onSubmit = e => {
     e.preventDefault();
     const value = inputRef.current.value;
-    value && searchItems(value);
+    value && getSearchItems(value);
   };
 
   return (
