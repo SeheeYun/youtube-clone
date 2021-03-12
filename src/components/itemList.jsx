@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import Item from './item';
 import { observer } from 'mobx-react';
 
