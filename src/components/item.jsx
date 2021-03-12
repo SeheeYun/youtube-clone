@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 
 const Item = ({ item, diff, view, getVideo }) => {
   const itemClick = () => {
@@ -28,4 +29,4 @@ const Item = ({ item, diff, view, getVideo }) => {
   );
 };
 
-export default Item;
+export default observer(Item);

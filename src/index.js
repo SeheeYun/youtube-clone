@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './app';
 import '@fortawesome/fontawesome-free/js/all.js';
+import { Provider } from 'mobx-react';
+import Store from './store/store';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={Store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );

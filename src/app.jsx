@@ -3,8 +3,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import ItemList from './components/itemList';
 import Header from './components/header';
 import Player from './components/player';
+import { inject, observer } from 'mobx-react';
 
-const App = () => {
+const App = props => {
+  console.log(props.store.data.name);
+
   const [data, setData] = useState({});
   const [items, setItems] = useState([]);
   const [item, setItem] = useState();
@@ -123,4 +126,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default inject('store')(observer(App));

@@ -1,6 +1,7 @@
 import { memo, React, useRef } from 'react';
+import { observer } from 'mobx-react';
 
-const Header = memo(({ getSearchItems }) => {
+const Header = ({ getSearchItems }) => {
   const inputRef = useRef();
 
   const onSubmit = e => {
@@ -28,6 +29,6 @@ const Header = memo(({ getSearchItems }) => {
       </div>
     </header>
   );
-});
+};
 
-export default Header;
+export default observer(Header);

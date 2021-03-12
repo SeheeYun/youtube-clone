@@ -1,7 +1,8 @@
 import React, { memo, useCallback } from 'react';
 import Item from './item';
+import { observer } from 'mobx-react';
 
-const ItemList = memo(({ items, getVideo }) => {
+const ItemList = ({ items, getVideo }) => {
   const parseIntView = useCallback(item => {
     const view = item.statistics.viewCount;
     if (view >= 10000) {
@@ -33,6 +34,6 @@ const ItemList = memo(({ items, getVideo }) => {
       ))}
     </ul>
   );
-});
+};
 
-export default ItemList;
+export default observer(ItemList);

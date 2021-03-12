@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 
 const Player = ({ item }) => {
   return (
@@ -46,4 +47,4 @@ const Player = ({ item }) => {
   );
 };
 
-export default Player;
+export default observer(Player);
