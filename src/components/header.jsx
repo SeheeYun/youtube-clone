@@ -1,15 +1,7 @@
-import { memo, React, useRef } from 'react';
+import { React } from 'react';
 import { observer } from 'mobx-react';
 
-const Header = ({ getSearchItems }) => {
-  const inputRef = useRef();
-
-  const onSubmit = e => {
-    e.preventDefault();
-    const value = inputRef.current.value;
-    value && getSearchItems(value);
-  };
-
+const Header = ({ onSubmit, inputRef }) => {
   return (
     <header className="header">
       <a href="#" className="logo">
