@@ -1,4 +1,11 @@
-import { action, computed, makeObservable, observable, toJS } from 'mobx';
+import {
+  action,
+  computed,
+  makeObservable,
+  observable,
+  runInAction,
+  toJS,
+} from 'mobx';
 
 class Store {
   constructor() {
@@ -55,34 +62,41 @@ class Store {
   @action
   addPage = keyword => {
     !keyword
-      ? this.fetchData(this.popular) //
-          .then(json => {
+      ? this.fetchData(this.popular).then(json => {
+          runInAction(() => {
             this._items = json.items;
             this.nextPageToken = json.nextPageToken;
-          })
-      : this.getItemsId(keyword) //
-          .then(id => {
-            this.search.id = id;
-            this.fetchData(this.search)
-              .then(json => (this._items = json.items))
-              .then(this.offPlayer());
           });
+        })
+      : this.getItemsId(keyword).then(id => {
+          this.search.id = id;
+          this.fetchData(this.search)
+            .then(json => {
+              runInAction(() => {
+                this._items = json.items;
+              });
+            })
+            .then(this.offPlayer());
+        });
   };
 
   @action
   addNextPage = keyword => {
     !keyword
-      ? this.fetchData(this.popular, this.nextPageToken) //
-          .then(json => {
+      ? this.fetchData(this.popular, this.nextPageToken).then(json => {
+          runInAction(() => {
             this._items = this._items.concat(json.items);
             this.nextPageToken = json.nextPageToken;
-          })
-      : this.getItemsId(keyword, this.nextPageToken) //
-          .then(id => {
-            this.search.id = id;
-            this.fetchData(this.search) //
-              .then(json => (this._items = this._items.concat(json.items)));
           });
+        })
+      : this.getItemsId(keyword, this.nextPageToken).then(id => {
+          this.search.id = id;
+          this.fetchData(this.search).then(json =>
+            runInAction(() => {
+              this._items = this._items.concat(json.items);
+            })
+          );
+        });
   };
 
   @action
@@ -99,7 +113,9 @@ class Store {
     )
       .then(response => response.json())
       .then(json => {
-        this.nextPageToken = json.nextPageToken;
+        runInAction(() => {
+          this.nextPageToken = json.nextPageToken;
+        });
         return json.items.map(item => item.id.videoId);
       })
       .then(id => id.join())

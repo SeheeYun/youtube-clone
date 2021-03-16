@@ -26,7 +26,9 @@ const App = ({ store }) => {
   const onScroll = useCallback(() => {
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
     if (scrollTop + clientHeight === scrollHeight) {
-      !inputRef.current.value ? store.addNextPage() : console.log('moresearch');
+      !inputRef.current.value
+        ? store.addNextPage()
+        : store.addNextPage(inputRef.current.value);
     }
   }, []);
 
