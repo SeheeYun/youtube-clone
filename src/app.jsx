@@ -7,11 +7,12 @@ import { inject, observer } from 'mobx-react';
 
 const App = ({ store }) => {
   const inputRef = useRef();
-  const onSubmit = e => {
+  const onSubmit = useCallback(e => {
     e.preventDefault();
+    window.scrollTo({ top: 0 });
     const value = inputRef.current.value;
     value && store.addPage(value);
-  };
+  }, []);
 
   useEffect(() => {
     store.addPage();
@@ -31,6 +32,8 @@ const App = ({ store }) => {
         : store.addNextPage(inputRef.current.value);
     }
   }, []);
+
+  console.log(store.items);
 
   return (
     <>
