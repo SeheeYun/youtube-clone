@@ -25,7 +25,7 @@ const ItemList = ({ items, getVideo }) => {
     <ul className="item_list">
       {items.map(item => (
         <Item
-          key={item['id']}
+          key={item.id + items.indexOf(item)}
           item={item}
           diff={diff(item)}
           view={item.statistics && parseIntView(item)}
