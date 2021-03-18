@@ -34,7 +34,7 @@ class Store {
   @observable
   nextPageToken = null;
 
-  @observable
+  @observable.ref
   item = null;
 
   @action
@@ -70,13 +70,12 @@ class Store {
         })
       : this.getItemsId(keyword).then(id => {
           this.search.id = id;
-          this.fetchData(this.search)
-            .then(json => {
-              runInAction(() => {
-                this._items = json.items;
-              });
-            })
-            .then(this.offPlayer());
+          this.fetchData(this.search).then(json => {
+            runInAction(() => {
+              this._items = json.items;
+              this.offPlayer();
+            });
+          });
         });
   };
 

@@ -7,11 +7,18 @@ import { inject, observer } from 'mobx-react';
 
 const App = ({ store }) => {
   const inputRef = useRef();
+
   const onSubmit = useCallback(e => {
     e.preventDefault();
     window.scrollTo({ top: 0 });
     const value = inputRef.current.value;
     value && store.addPage(value);
+    onSearchBar();
+  }, []);
+
+  const onSearchBar = useCallback(() => {
+    const searchBox = document.querySelector('.search_box');
+    searchBox.classList.toggle('on_search_box');
   }, []);
 
   useEffect(() => {
@@ -33,13 +40,17 @@ const App = ({ store }) => {
     }
   }, []);
 
-  console.log(store.items);
-
   return (
     <>
-      <Header onSubmit={onSubmit} inputRef={inputRef} />
+      <Header
+        onSubmit={onSubmit}
+        onSearchBar={onSearchBar}
+        inputRef={inputRef}
+      />
       <div className="content">
-        {store.item && <Player item={store.item} />}
+        {store.item && (
+          <Player item={store.item} getChannelLogo={store.getChannelLogo} />
+        )}
         {store.items && (
           <ItemList items={store.items} getVideo={store.getVideo} />
         )}
