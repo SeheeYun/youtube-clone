@@ -5,7 +5,7 @@ const Header = ({ onSubmit, inputRef, onSearchBar }) => {
   return (
     <header className="header">
       <a href="#" className="logo">
-        <img src="/images/logo.png" alt="logo" />
+        <img src="./images/logo.png" alt="logo" />
         <span>YunTube</span>
       </a>
       <div className="search_box">

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto&display=swap');
 
 :root {
+  --wide-pc-item-per-row: 5;
   --pc-item-per-row: 4;
   --tablet-item-per-row: 3;
   --mobile-item-per-row: 2;
@@ -294,6 +295,12 @@ h1.title {
 .video_meta > .meta > span:last-child {
   max-width: 600px;
   width: 100%;
+}
+
+@media screen and (min-width: 1760px) {
+  .item {
+    width: calc(100% / var(--wide-pc-item-per-row));
+  }
 }
 
 @media screen and (max-width: 1024px) {
