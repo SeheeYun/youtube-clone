@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 const Header = ({ onSubmit, inputRef, onSearchBar }) => {
   return (
     <header className="header">
-      <a href="#" className="logo">
+      <a href="https://seheeyun.github.io/youtube-clone/" className="logo">
         <img src="./images/logo.png" alt="logo" />
         <span>YunTube</span>
       </a>
