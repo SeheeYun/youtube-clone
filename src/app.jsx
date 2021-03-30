@@ -47,10 +47,8 @@ const App = ({ store }) => {
         onSearchBar={onSearchBar}
         inputRef={inputRef}
       />
-      <div className="content">
-        {store.item && (
-          <Player item={store.item} getChannelLogo={store.getChannelLogo} />
-        )}
+      <div className={`content ${store.item ? 'on_player' : ''}`}>
+        {store.item && <Player item={store.item} />}
         {store.items && (
           <ItemList items={store.items} getVideo={store.getVideo} />
         )}

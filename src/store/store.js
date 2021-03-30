@@ -90,18 +90,11 @@ class Store {
   @action
   getVideo = item => {
     this.item = item;
-    this.onPlayer();
   };
 
-  onPlayer = () => {
-    const content = document.querySelector('.content');
-    content.classList.add('on_player');
-  };
-
+  @action
   offPlayer = () => {
-    const content = document.querySelector('.content');
-    content.classList.contains('on_player') &&
-      content.classList.remove('on_player');
+    this.item = null;
   };
 }
 
