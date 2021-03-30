@@ -23,7 +23,7 @@ const App = ({ store }) => {
 
   useEffect(() => {
     store.addPage();
-  }, []);
+  }, [store]);
 
   useEffect(() => {
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -31,14 +31,14 @@ const App = ({ store }) => {
       window.removeEventListener('scroll', onScroll, { passive: true });
   }, []);
 
-  const onScroll = useCallback(() => {
+  const onScroll = () => {
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
     if (scrollTop + clientHeight === scrollHeight) {
       !inputRef.current.value
         ? store.addNextPage()
         : store.addNextPage(inputRef.current.value);
     }
-  }, []);
+  };
 
   return (
     <>
@@ -50,7 +50,7 @@ const App = ({ store }) => {
       <div className={`content ${store.item ? 'on_player' : ''}`}>
         {store.item && <Player item={store.item} />}
         {store.items && (
-          <ItemList items={store.items} getVideo={store.getVideo} />
+          <ItemList items={store.items} onItemClick={store.onItemClick} />
         )}
       </div>
     </>

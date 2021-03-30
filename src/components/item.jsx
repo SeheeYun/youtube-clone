@@ -1,9 +1,9 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 
-const Item = ({ item, diff, view, getVideo }) => {
+const Item = ({ item, diff, view, onItemClick }) => {
   const itemClick = () => {
-    getVideo(item);
+    onItemClick(item);
   };
 
   return (

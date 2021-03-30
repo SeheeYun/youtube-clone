@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import Item from './item';
 import { observer } from 'mobx-react';
 
-const ItemList = ({ items, getVideo }) => {
+const ItemList = ({ items, onItemClick }) => {
   const parseIntView = useCallback(item => {
     const view = item.statistics.viewCount;
     if (view >= 10000) {
@@ -29,7 +29,7 @@ const ItemList = ({ items, getVideo }) => {
           item={item}
           diff={diff(item)}
           view={item.statistics && parseIntView(item)}
-          getVideo={getVideo}
+          onItemClick={onItemClick}
         />
       ))}
     </ul>

@@ -54,7 +54,7 @@ class Store {
             repository.fetchData(this.search).then(json => {
               runInAction(() => {
                 this._items = json.items;
-                this.offPlayer();
+                this.onItemClick(null);
               });
             });
           });
@@ -88,13 +88,8 @@ class Store {
   };
 
   @action
-  getVideo = item => {
+  onItemClick = item => {
     this.item = item;
-  };
-
-  @action
-  offPlayer = () => {
-    this.item = null;
   };
 }
 
