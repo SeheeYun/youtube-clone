@@ -10,7 +10,6 @@ const Player = ({ item }) => {
             title="video"
             id="player"
             type="text/html"
-            allow="autoplay"
             allowFullScreen
             src={`https://www.youtube.com/embed/${item.id}`}
           />

@@ -9,11 +9,9 @@ const Item = ({ item, diff, view, getVideo }) => {
   return (
     <li className="item">
       <div className="item_box" onClick={itemClick}>
-        <div className="thumb">
-          <a href="#">
-            <img src={item.snippet.thumbnails.medium.url} alt="thumb" />
-          </a>
-        </div>
+        <a href="#" className="thumb">
+          <img src={item.snippet.thumbnails.medium.url} alt="thumb" />
+        </a>
         <div className="meta">
           <a className="title" href="#">
             {item.snippet.title}
