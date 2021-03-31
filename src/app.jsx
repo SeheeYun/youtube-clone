@@ -39,7 +39,6 @@ const App = ({ store }) => {
         : store.addNextPage(inputRef.current.value);
     }
   };
-
   return (
     <>
       <Header

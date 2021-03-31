@@ -40,4 +40,4 @@ class Repository {
   };
 }
 
-export default new Repository(process.env.REACT_APP_API_KEY);
+export default Repository;

@@ -6,8 +6,9 @@ import {
   runInAction,
   toJS,
 } from 'mobx';
-import repository from '../repository/repository';
+import Repository from '../repository/repository';
 
+const repository = new Repository(process.env.REACT_APP_API_KEY);
 class Store {
   constructor() {
     makeObservable(this);

@@ -11,7 +11,8 @@ const Player = ({ item }) => {
             id="player"
             type="text/html"
             allowFullScreen
-            src={`https://www.youtube.com/embed/${item.id}`}
+            allow="autoplay"
+            src={`https://www.youtube.com/embed/${item.id}?autoplay=1`}
           />
         </div>
       </div>
@@ -26,10 +27,10 @@ const Player = ({ item }) => {
               <span>{item.snippet.publishedAt.substr(0, 10)}</span>
             </div>
             <div className="like_disLike">
-              <button>
+              <button title="좋아요">
                 <i className="fas fa-thumbs-up"></i> {item.statistics.likeCount}
               </button>
-              <button>
+              <button title="싫어요">
                 <i className="fas fa-thumbs-down"></i>{' '}
                 {item.statistics.dislikeCount}
               </button>
