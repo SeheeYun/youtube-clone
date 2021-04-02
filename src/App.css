@@ -47,7 +47,7 @@ button {
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 1;
+  z-index: 998;
   width: 100%;
   height: 56px;
   background-color: #ffffff;
@@ -145,6 +145,12 @@ button {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+}
+.load {
+  position: absolute;
+  transform: translateY(-300px);
+  bottom: 0;
+  z-index: 1;
 }
 .item {
   width: calc(100% / var(--pc-item-per-row));
@@ -344,7 +350,7 @@ button {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 999;
     height: 100%;
     width: 100%;
     max-width: 100%;

@@ -92,6 +92,18 @@ class Store {
   onItemClick = item => {
     this.item = item;
   };
+
+  @observable
+  load = false;
+
+  @action
+  loaded = loaded => {
+    if (loaded) {
+      this.load = true;
+    } else {
+      this.load = false;
+    }
+  };
 }
 
 export default new Store();

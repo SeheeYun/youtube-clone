@@ -7,6 +7,7 @@ import { inject, observer } from 'mobx-react';
 
 const App = ({ store }) => {
   const inputRef = useRef();
+  const loadRef = useRef();
 
   const onSubmit = useCallback(e => {
     e.preventDefault();
@@ -23,22 +24,26 @@ const App = ({ store }) => {
 
   useEffect(() => {
     store.addPage();
+    store.loaded(true);
   }, [store]);
 
   useEffect(() => {
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () =>
-      window.removeEventListener('scroll', onScroll, { passive: true });
-  }, []);
+    let io;
+    if (loadRef.current) {
+      io = new IntersectionObserver(onIo, { threshold: 0 });
+      io.observe(loadRef.current);
+    }
+    return () => io && io.disconnect();
+  }, [loadRef.current]);
 
-  const onScroll = () => {
-    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-    if (scrollTop + clientHeight === scrollHeight) {
+  const onIo = ([entry]) => {
+    if (entry.isIntersecting) {
       !inputRef.current.value
         ? store.addNextPage()
         : store.addNextPage(inputRef.current.value);
     }
   };
+
   return (
     <>
       <Header
@@ -51,6 +56,7 @@ const App = ({ store }) => {
         {store.items && (
           <ItemList items={store.items} onItemClick={store.onItemClick} />
         )}
+        {store.load && <div ref={loadRef} className="load"></div>}
       </div>
     </>
   );
