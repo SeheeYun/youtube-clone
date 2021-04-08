@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 
 const ItemList = ({ items, onItemClick }) => {
   return (
-    <ul className="item_list">
+    <ul className="item-list">
       {items.map(item => (
         <Item
           key={item.id + items.indexOf(item)}

@@ -7,19 +7,21 @@ import { inject, observer } from 'mobx-react';
 
 const App = ({ store }) => {
   const inputRef = useRef();
-  const loadRef = useRef();
+  const sentinelRef = useRef();
 
-  const onSubmit = useCallback(e => {
-    e.preventDefault();
-    window.scrollTo({ top: 0 });
-    const value = inputRef.current.value;
-    value && store.addPage(value);
-    onSearchBar();
-  }, []);
+  const onSubmit = useCallback(
+    e => {
+      e.preventDefault();
+      const value = inputRef.current.value;
+      value && store.addPage(value);
+      onSearchBar();
+    },
+    [store]
+  );
 
   const onSearchBar = useCallback(() => {
-    const searchBox = document.querySelector('.search_box');
-    searchBox.classList.toggle('on_search_box');
+    const searchBox = document.querySelector('.search-box');
+    searchBox.classList.toggle('on-search-box');
   }, []);
 
   useEffect(() => {
@@ -29,20 +31,21 @@ const App = ({ store }) => {
 
   useEffect(() => {
     let io;
-    if (loadRef.current) {
-      io = new IntersectionObserver(onIo, { threshold: 0 });
-      io.observe(loadRef.current);
+    if (sentinelRef.current) {
+      io = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            !inputRef.current.value
+              ? store.addNextPage()
+              : store.addNextPage(inputRef.current.value);
+          }
+        },
+        { threshold: 0 }
+      );
+      io.observe(sentinelRef.current);
     }
     return () => io && io.disconnect();
-  }, [loadRef.current]);
-
-  const onIo = ([entry]) => {
-    if (entry.isIntersecting) {
-      !inputRef.current.value
-        ? store.addNextPage()
-        : store.addNextPage(inputRef.current.value);
-    }
-  };
+  }, [sentinelRef.current]);
 
   return (
     <>
@@ -51,12 +54,12 @@ const App = ({ store }) => {
         onSearchBar={onSearchBar}
         inputRef={inputRef}
       />
-      <div className={`content ${store.item ? 'on_player' : ''}`}>
+      <div className={`content ${store.item ? 'on-player' : ''}`}>
         {store.item && <Player item={store.item} />}
         {store.items && (
           <ItemList items={store.items} onItemClick={store.onItemClick} />
         )}
-        {store.load && <div ref={loadRef} className="load"></div>}
+        {store.isload && <div ref={sentinelRef} className="sentinel"></div>}
       </div>
     </>
   );

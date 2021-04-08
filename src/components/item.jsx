@@ -1,7 +1,10 @@
 import React, { useCallback } from 'react';
 import { observer } from 'mobx-react';
+import useObserverLazyLoad from '../hooks/useObserverLazyLoad';
 
 const Item = ({ item, onItemClick }) => {
+  const { isloaded, itemRef } = useObserverLazyLoad();
+
   const itemClick = () => {
     onItemClick(item);
   };
@@ -31,22 +34,35 @@ const Item = ({ item, onItemClick }) => {
   }, []);
 
   return (
-    <li className="item">
-      <div className="item_box" onClick={itemClick}>
-        <a href="#" className="thumb">
-          <img src={item.snippet.thumbnails.medium.url} alt="thumb" />
-        </a>
-        <div className="meta">
-          <a className="title" href="#">
-            {item.snippet.title}
+    <li className="item" ref={itemRef}>
+      {isloaded && (
+        <div className="item-box" onClick={itemClick}>
+          <a href="#" className="thumb">
+            <img src={item.snippet.thumbnails.medium.url} alt="thumb" />
           </a>
-          <div className="channel_title">{item.snippet.channelTitle}</div>
-          <div className="meta_data item_meta_data">
-            <span>조회수 {parseIntView(item.statistics.viewCount)}회</span>
-            <span>{diffDate(item.snippet.publishedAt)} 전</span>
+          <div className="meta">
+            <a className="title" href="#">
+              {item.snippet.title}
+            </a>
+            <div className="channel-title">{item.snippet.channelTitle}</div>
+            <div className="meta-data item-meta-data">
+              <span>조회수 {parseIntView(item.statistics.viewCount)}회</span>
+              <span>{diffDate(item.snippet.publishedAt)} 전</span>
+            </div>
           </div>
         </div>
-      </div>
+      )}
+      {!isloaded && (
+        <div className="item-box">
+          <div className="skeleton-thumb">
+            <div></div>
+          </div>
+          <div className="meta">
+            <div className="skeleton-title"></div>
+            <div className="skeleton-title"></div>
+          </div>
+        </div>
+      )}
     </li>
   );
 };

@@ -3,9 +3,9 @@ import { observer } from 'mobx-react';
 
 const Player = ({ item }) => {
   return (
-    <div className="player_box">
-      <div className="player_video_box">
-        <div className="player_video">
+    <div className="player-box">
+      <div className="player-video-box">
+        <div className="player-video">
           <iframe
             title="video"
             id="player"
@@ -16,17 +16,17 @@ const Player = ({ item }) => {
           />
         </div>
       </div>
-      <div className="video_info_box">
-        <div className="video_info">
+      <div className="video-info-box">
+        <div className="video-info">
           <h1 className="title">{item.snippet.title}</h1>
           <div>
-            <div className="meta_data">
+            <div className="meta-data">
               <span>
                 조회수 {parseInt(item.statistics.viewCount).toLocaleString()}회
               </span>
               <span>{item.snippet.publishedAt.substr(0, 10)}</span>
             </div>
-            <div className="like_disLike">
+            <div className="like-disLike">
               <button title="좋아요">
                 <i className="fas fa-thumbs-up"></i> {item.statistics.likeCount}
               </button>
@@ -37,8 +37,8 @@ const Player = ({ item }) => {
             </div>
           </div>
         </div>
-        <div className="video_meta">
-          <div className="meta_thumb">
+        <div className="video-meta">
+          <div className="meta-thumb">
             {item.snippet.channelTitle.substr(0, 1)}
           </div>
           <div className="meta">

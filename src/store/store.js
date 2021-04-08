@@ -35,6 +35,7 @@ class Store {
 
   @action
   addPage = keyword => {
+    this._items = [];
     !keyword
       ? repository.fetchData(this.popular).then(json => {
           runInAction(() => {
@@ -94,14 +95,14 @@ class Store {
   };
 
   @observable
-  load = false;
+  isload = false;
 
   @action
   loaded = loaded => {
     if (loaded) {
-      this.load = true;
+      this.isload = true;
     } else {
-      this.load = false;
+      this.isload = false;
     }
   };
 }

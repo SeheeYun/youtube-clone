@@ -8,32 +8,32 @@ const Header = ({ onSubmit, inputRef, onSearchBar }) => {
         <img src="./images/logo.png" alt="logo" />
         <span>YunTube</span>
       </a>
-      <div className="search_box">
-        <form className="search_form" onSubmit={onSubmit}>
+      <div className="search-box">
+        <form className="search-form" onSubmit={onSubmit}>
           <button
             type="button"
             title="뒤로"
-            className="back_btn"
+            className="back-btn"
             onClick={onSearchBar}
           >
             <i className="fas fa-arrow-left"></i>
           </button>
           <input ref={inputRef} stype="text" placeholder="검색" />
-          <button type="submit" title="검색" className="search_btn">
+          <button type="submit" title="검색" className="search-btn">
             <i className="fas fa-search"></i>
           </button>
         </form>
       </div>
-      <div className="top_bar">
+      <div className="top-bar">
         <button
           type="button"
           title="검색"
-          className="search_btn"
+          className="search-btn"
           onClick={onSearchBar}
         >
           <i className="fas fa-search"></i>
         </button>
-        <button title="로그인" className="avatar_btn">
+        <button title="로그인" className="avatar-btn">
           <i className="fas fa-user"></i>
         </button>
       </div>
