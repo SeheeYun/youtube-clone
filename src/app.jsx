@@ -19,11 +19,6 @@ const App = ({ store }) => {
     [store]
   );
 
-  const onSearchBar = useCallback(() => {
-    const searchBox = document.querySelector('.search-box');
-    searchBox.classList.toggle('on-search-box');
-  }, []);
-
   useEffect(() => {
     store.addPage();
     store.loaded(true);
@@ -45,7 +40,7 @@ const App = ({ store }) => {
       io.observe(sentinelRef.current);
     }
     return () => io && io.disconnect();
-  }, [sentinelRef.current]);
+  }, [sentinelRef.current, store]);
 
   return (
     <>
@@ -63,6 +58,11 @@ const App = ({ store }) => {
       </div>
     </>
   );
+};
+
+const onSearchBar = () => {
+  const searchBox = document.querySelector('.search-box');
+  searchBox.classList.toggle('on-search-box');
 };
 
 export default inject('store')(observer(App));

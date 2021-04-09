@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { observer } from 'mobx-react';
 import useObserverLazyLoad from '../hooks/useObserverLazyLoad';
-import styled from 'styled-components';
 
 const Item = ({ item, onItemClick }) => {
   const { isloaded, itemRef } = useObserverLazyLoad();
@@ -36,15 +35,15 @@ const Item = ({ item, onItemClick }) => {
 
   return (
     <li className="item" ref={itemRef}>
-      {isloaded ? (
+      {isloaded && (
         <div className="item-box" onClick={itemClick}>
-          <ThumbContainer>
-            <Thumb bg={item.snippet.thumbnails.medium.url}>
-              <div></div>
-            </Thumb>
-          </ThumbContainer>
+          <a href="#" className="thumb">
+            <img src={item.snippet.thumbnails.medium.url} alt="thumb" />
+          </a>
           <div className="meta">
-            <h4 className="title">{item.snippet.title}</h4>
+            <a className="title" href="#">
+              {item.snippet.title}
+            </a>
             <div className="channel-title">{item.snippet.channelTitle}</div>
             <div className="meta-data item-meta-data">
               <span>조회수 {parseIntView(item.statistics.viewCount)}회</span>
@@ -52,55 +51,20 @@ const Item = ({ item, onItemClick }) => {
             </div>
           </div>
         </div>
-      ) : (
+      )}
+      {!isloaded && (
         <div className="item-box">
-          <ThumbContainer>
-            <Thumb>
-              <div></div>
-            </Thumb>
-          </ThumbContainer>
+          <div className="skeleton-thumb">
+            <div></div>
+          </div>
           <div className="meta">
-            <Skeleton />
-            <Skeleton />
+            <div className="skeleton-title"></div>
+            <div className="skeleton-title"></div>
           </div>
         </div>
       )}
     </li>
   );
 };
-
-const ThumbContainer = styled.div`
-  width: 100%;
-`;
-
-const Thumb = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  padding-bottom: 56.25%;
-  & > div {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: ${props =>
-      props.bg ? `url(${props.bg})` : 'var(--search-form-border-color)'};
-    background-size: contain;
-    transition: ease 0.2s;
-  }
-`;
-
-const Skeleton = styled.div`
-  background-color: var(--search-form-border-color);
-  width: 100%;
-  height: 20px;
-  margin-top: 12px;
-  margin-bottom: 4px;
-  & + & {
-    width: 80%;
-  }
-`;
 
 export default observer(Item);
