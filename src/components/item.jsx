@@ -8,6 +8,7 @@ const Item = ({ item, onItemClick }) => {
 
   const itemClick = () => {
     onItemClick(item);
+    window.scrollTo({ top: 0 });
   };
 
   const parseIntView = view => {
