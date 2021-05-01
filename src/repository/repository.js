@@ -15,7 +15,7 @@ class Repository {
 
     try {
       const response = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics&maxResults=20&key=${this.key}&` +
+        `https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics&maxResults=24&key=${this.key}&` +
           query +
           (pageToken ? `&pageToken=${pageToken}` : ''),
         this.getRequestOptions
@@ -29,7 +29,7 @@ class Repository {
   getItemsId = async (keyword, pageToken) => {
     try {
       const response = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/search?maxResults=20&q=${keyword}&type=video&key=${this.key}` +
+        `https://youtube.googleapis.com/youtube/v3/search?maxResults=24&q=${keyword}&type=video&key=${this.key}` +
           (pageToken ? `&pageToken=${pageToken}` : ''),
         this.getRequestOptions
       );
